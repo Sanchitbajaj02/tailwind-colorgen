@@ -4,8 +4,8 @@
 import { useState, useMemo } from "react";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import chroma from "chroma-js";
-import { Input } from "./ui/input";
-import CopyTooltip from "./copy-tooltip";
+import { Input } from "@/components/ui/input";
+import CopyTooltip from "@/components/color-picker/copy-tooltip";
 
 export default function ColorPicker() {
   const [color, setColor] = useState("#ef4444");
@@ -60,8 +60,8 @@ export default function ColorPicker() {
   );
 
   return (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center my-8 w-full">
+    <section className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center w-full">
         <HexColorPicker color={color} onChange={setColor} style={{width: "100%"}} />
         <div>
           <HexColorInput
@@ -75,7 +75,7 @@ export default function ColorPicker() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-5 xl:grid-cols-10 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
         {Object.entries(palette).map(([key, hex], index) => (
           <CopyTooltip
             key={key}
@@ -87,7 +87,7 @@ export default function ColorPicker() {
         ))}
       </div>
 
-      <section className="mt-8 grid grid-cols-2 gap-4">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center w-full">
         <article>
           <div className="flex flex-col md:flex-row gap-2 mb-2">
             <h2 className="text-xl font-semibold">Tailwind V3</h2>
@@ -130,6 +130,6 @@ ${Object.entries(palette)
           </pre>
         </article>
       </section>
-    </>
+    </section>
   );
 }
