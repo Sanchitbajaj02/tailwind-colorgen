@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import CopyTooltip from "@/components/color-picker/copy-tooltip";
 
 export default function ColorPicker() {
-  const [color, setColor] = useState("#ef4444");
+  const [color, setColor] = useState("#000000");
   const [tailwind3, setTailwind3] = useState("");
   const [tailwind4, setTailwind4] = useState("");
 
