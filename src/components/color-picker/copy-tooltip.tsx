@@ -1,10 +1,6 @@
 import React from "react";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { LockIcon } from "lucide-react";
 import { toast } from "sonner";
 
@@ -17,12 +13,7 @@ interface CopyTooltipType {
   index: number;
 }
 
-export default function CopyTooltip({
-  colorNumberKey,
-  hex,
-  closestIndex,
-  index,
-}: CopyTooltipType) {
+export default function CopyTooltip({ colorNumberKey, hex, closestIndex, index }: CopyTooltipType) {
   const onSuccessCopy = () => {
     toast.success(`${hex.toUpperCase()} has been copied to clipboard`);
   };
@@ -43,14 +34,11 @@ export default function CopyTooltip({
         <div className="p-2 text-center">
           <div className="text-sm font-semibold">{colorNumberKey}</div>
           <div className="text-sm text-black flex gap-1 items-center justify-center">
-            {hex.toUpperCase()}{" "}
-            {index === closestIndex && <LockIcon size={14} />}
+            {hex.toUpperCase()} {index === closestIndex && <LockIcon size={14} />}
           </div>
         </div>
       </TooltipTrigger>
-      <TooltipContent>
-        {isCopied ? "Copied!" : `Copy ${hex.toUpperCase()}`}
-      </TooltipContent>
+      <TooltipContent>{isCopied ? "Copied!" : `Copy ${hex.toUpperCase()}`}</TooltipContent>
     </Tooltip>
   );
 }

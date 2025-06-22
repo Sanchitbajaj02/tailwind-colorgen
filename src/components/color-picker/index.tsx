@@ -13,27 +13,12 @@ export default function ColorPicker() {
   const [tailwind4, setTailwind4] = useState("");
 
   const generateColorScale = (inputColor: string) => {
-    const labels = [
-      "50",
-      "100",
-      "200",
-      "300",
-      "400",
-      "500",
-      "600",
-      "700",
-      "800",
-      "900",
-    ];
+    const labels = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"];
     let closestIndex = 0;
     let minDelta = Infinity;
 
     const scale = chroma
-      .scale([
-        chroma(inputColor).brighten(4),
-        inputColor,
-        chroma(inputColor).darken(3.5),
-      ])
+      .scale([chroma(inputColor).brighten(4), inputColor, chroma(inputColor).darken(3.5)])
       .mode("lch")
       .colors(10);
 
@@ -54,36 +39,21 @@ export default function ColorPicker() {
     return { result, closestIndex };
   };
 
-  const { result: palette, closestIndex } = useMemo(
-    () => generateColorScale(color),
-    [color]
-  );
+  const { result: palette, closestIndex } = useMemo(() => generateColorScale(color), [color]);
 
   return (
     <section className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center w-full">
-        <HexColorPicker color={color} onChange={setColor} style={{width: "100%"}} />
+        <HexColorPicker color={color} onChange={setColor} style={{ width: "100%" }} />
         <div>
-          <HexColorInput
-            className="border rounded p-2 w-full"
-            color={color}
-            onChange={setColor}
-          />
-          <div className="text-sm text-gray-600 mt-1">
-            Pick a color or input HEX code
-          </div>
+          <HexColorInput className="border rounded p-2 w-full" color={color} onChange={setColor} />
+          <div className="text-sm text-gray-600 mt-1">Pick a color or input HEX code</div>
         </div>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
         {Object.entries(palette).map(([key, hex], index) => (
-          <CopyTooltip
-            key={key}
-            colorNumberKey={key}
-            hex={hex}
-            closestIndex={closestIndex}
-            index={index}
-          />
+          <CopyTooltip key={key} colorNumberKey={key} hex={hex} closestIndex={closestIndex} index={index} />
         ))}
       </div>
 
