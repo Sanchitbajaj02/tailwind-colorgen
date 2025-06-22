@@ -1,6 +1,6 @@
-# Tailwind ColorGen
+# Tailwind Colorgen
 
-Tailwind ColorGen is a web-based tool for generating and customizing color palettes for Tailwind CSS projects. It allows users to create, preview, and export color configurations seamlessly.
+Tailwind Colorgen is a web-based tool for generating and customizing color palettes for Tailwind CSS projects. It allows users to create, preview, and export color configurations seamlessly.
 
 ## Features
 
