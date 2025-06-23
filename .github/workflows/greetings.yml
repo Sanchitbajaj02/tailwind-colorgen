@@ -2,8 +2,6 @@ name: 'Greetings'
 
 on:
   fork:
-  push:
-    branches: [master]
   issues:
     types: [opened]
   pull_request_target:
@@ -13,8 +11,8 @@ jobs:
   welcome:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: EddieHubCommunity/gh-action-community@main
+      - uses: actions/checkout@main
+      - uses: EddieHubCommunity/gh-action-community/src/welcome@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: 'Congratulations, @${{ github.actor }}! 🎉 Thank you for creating the issue. Your contribution is greatly appreciated and we look forward to working with you to resolve the issue. Keep up the great work!'
