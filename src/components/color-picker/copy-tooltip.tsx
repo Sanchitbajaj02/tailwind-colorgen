@@ -32,7 +32,7 @@ export default function CopyTooltip({ colorNumberKey, hex, closestIndex, index }
       >
         <div className="h-20" style={{ backgroundColor: hex }}></div>
         <div className="p-2 text-center">
-          <div className="text-sm font-semibold">{colorNumberKey}</div>
+          <div className="text-base font-semibold">{colorNumberKey}</div>
           <div className="text-sm text-black flex gap-1 items-center justify-center">
             {hex.toUpperCase()} {index === closestIndex && <LockIcon size={14} />}
           </div>

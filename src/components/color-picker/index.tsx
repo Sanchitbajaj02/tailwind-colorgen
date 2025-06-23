@@ -6,6 +6,7 @@ import { HexColorInput, HexColorPicker } from "react-colorful";
 import chroma from "chroma-js";
 import { Input } from "@/components/ui/input";
 import CopyTooltip from "@/components/color-picker/copy-tooltip";
+import seedRandom from "seedrandom"
 
 export default function ColorPicker() {
   const [color, setColor] = useState("#000000");
@@ -18,7 +19,7 @@ export default function ColorPicker() {
     let minDelta = Infinity;
 
     const scale = chroma
-      .scale([chroma(inputColor).brighten(4), inputColor, chroma(inputColor).darken(3.5)])
+      .scale([chroma(inputColor).brighten(3), inputColor, chroma(inputColor).darken(2)])
       .mode("lch")
       .colors(10);
 
@@ -39,7 +40,22 @@ export default function ColorPicker() {
     return { result, closestIndex };
   };
 
+  const generateColorName = (inputColor: string) => {
+    // Seed-based random generator using the color hex
+    // const seed = parseInt(inputColor.slice(1), 16);
+    const rng = seedRandom(inputColor);
+
+    // Generate a random name based on the seed
+    const names = ["Ocean", "Sky", "Coral", "Forest", "Sunset", "Lavender", "Keppel", "Mercury"];
+    const index = Math.floor(rng() * names.length);
+
+    return `${names[index]} ${inputColor.slice(1).toUpperCase()}`;
+  };
+
   const { result: palette, closestIndex } = useMemo(() => generateColorScale(color), [color]);
+  const paletteName = useMemo(() => generateColorName(color), [color])
+
+  console.log(paletteName)
 
   return (
     <section className="space-y-8">
@@ -51,7 +67,7 @@ export default function ColorPicker() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-4">
         {Object.entries(palette).map(([key, hex], index) => (
           <CopyTooltip key={key} colorNumberKey={key} hex={hex} closestIndex={closestIndex} index={index} />
         ))}
